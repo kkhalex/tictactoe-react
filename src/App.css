@@ -20,7 +20,10 @@
   height: 100%;
   background-color: #353535;
 }
-
+.stileBase .contenitore-principale {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 .stileBase h1 {
   margin: 2rem 0;
   color: white;

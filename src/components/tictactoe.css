@@ -3,14 +3,53 @@
   width: fit-content;
   height: fit-content;
   display: grid;
-  grid-template-columns: repeat(3, 150px);
+  grid-template-columns: repeat(3, 100px);
   padding: 10px;
   gap: 10px;
+  border-radius: 20px;
 }
 
 .cella-gioco {
   border: 1px solid;
   cursor: pointer;
-  width: 150px;
-  height: 150px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 5rem;
+  border-radius: 20px;
+}
+
+.player1 {
+  color: green;
+}
+.player2 {
+  color: red;
+}
+
+.box-punteggio {
+  border: 1px solid white;
+  border-radius: 10px;
+  margin: 1rem;
+  height: fit-content;
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bb13feb4,
+    0 0 0.8rem #56fe13a2, 0 0 2.8rem #a813fea2, inset 0 0 1.3rem #bb13fea2;
+}
+.box-punteggio h2 {
+  color: white;
+  text-shadow: 2px 2px 5px black;
+  margin: 1rem 0;
+}
+
+.container-score {
+  margin: 0.5rem;
+}
+.container-score div {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.container-score div p {
+  margin: 0 0.5rem;
 }
