@@ -1,34 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './App.css';
 import Griglia from './components/Griglia';
 import Punteggio from './components/Punteggio';
-function App() {
-  const [punteggio, setPunteggio] = useState([0, 0, 0]);
+import { PunteggioProvider } from './components/PunteggioProvider';
 
-  const updatePunteggio = (idx) => {
-    setPunteggio((punteggioPrecedente) => {
-      let nuovoPunteggio = [...punteggioPrecedente];
-      if (idx === 0) {
-        nuovoPunteggio[0] += 1;
-      } else if (idx === 1) {
-        nuovoPunteggio[1] += 1;
-      } else {
-        nuovoPunteggio[2] += 1;
-      }
-      return nuovoPunteggio;
-    });
-  };
-  useEffect(() => {
-    localStorage.setItem('punteggio', JSON.stringify(punteggio));
-  }, [punteggio]);
+function App() {
   return (
     <div className='stileBase'>
       <h1>Tic Tac Toe</h1>
-      <div className='contenitore-principale'>
-        <div>impostazionigr</div>
-        <Griglia updatePunteggio={updatePunteggio}></Griglia>
-        <Punteggio punteggio={punteggio}></Punteggio>
-      </div>
+      <PunteggioProvider>
+        <div className='contenitore-principale'>
+          <div>impostazionigr</div>
+          <Griglia></Griglia>
+          <Punteggio></Punteggio>
+        </div>
+      </PunteggioProvider>
     </div>
   );
 }

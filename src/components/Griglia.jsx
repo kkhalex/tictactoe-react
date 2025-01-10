@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import Cella from './Cella';
 import './tictactoe.css';
-const Griglia = ({ updatePunteggio }) => {
+import { PunteggioContext } from './PunteggioProvider';
+const Griglia = () => {
   const [numCelle, setNumCelle] = useState(Array(9).fill(''));
   const [giocando, setGiocando] = useState(true);
   const [tipoVittoria, setTipoVittoria] = useState('');
   const [celleVincenti, setCelleVincenti] = useState();
-  const [punteggio, setPunteggio] = useState([0, 0, 0]);
+  const { punteggio, updatePunteggio } = useContext(PunteggioContext);
+
   const combinazioniVincenti = [
     [0, 1, 2],
     [3, 4, 5],
@@ -27,7 +29,7 @@ const Griglia = ({ updatePunteggio }) => {
       controllaVincita('X', copiaCelle);
       const celleVuote = controllaCelle(copiaCelle);
       console.log(celleVuote);
-      if (celleVincenti) aggiornaPunteggio(1);
+      if (celleVuote) updatePunteggio(1);
       !celleVuote && inputCPU(copiaCelle);
     }
   };
@@ -38,8 +40,10 @@ const Griglia = ({ updatePunteggio }) => {
 
   const inputCPU = (celle) => {
     if (!giocando) return;
-
-    const rndIdx = Math.floor(Math.random() * 9);
+    let rndIdx;
+    if (!controllaCelle(celle)) {
+      rndIdx = Math.floor(Math.random() * 9);
+    }
 
     if (celle[rndIdx] === '') {
       celle[rndIdx] = 'O';
@@ -61,10 +65,11 @@ const Griglia = ({ updatePunteggio }) => {
         setCelleVincenti(combinazioniVincenti[i]);
         switch (tipo) {
           case 'X':
-            aggiornaPunteggio(0);
+            updatePunteggio(0);
             break;
           case 'O':
-            aggiornaPunteggio(2);
+            updatePunteggio(2);
+
             break;
           default:
             break;
@@ -73,10 +78,6 @@ const Griglia = ({ updatePunteggio }) => {
       }
     }
     return false;
-  };
-
-  const aggiornaPunteggio = (i) => {
-    updatePunteggio(i);
   };
 
   function resettaBoard() {

@@ -1,6 +1,7 @@
-import React from 'react';
-
-const Punteggio = ({ punteggio }) => {
+import React, { useContext } from 'react';
+import { PunteggioContext } from './PunteggioProvider';
+const Punteggio = () => {
+  const { punteggio } = useContext(PunteggioContext);
   return (
     <div className='box-punteggio'>
       <div className='container-score'>
